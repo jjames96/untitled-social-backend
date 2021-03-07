@@ -3,16 +3,16 @@ import UserController from "./controller/UserController";
 const Routes = [
   {
     method: "post",
-    route: "/register",
+    route: "/v1/auth/register",
     controller: UserController,
     action: "register",
   },
   {
     method: "post",
-    route: "/login",
+    route: "/v1/auth/login",
     controller: UserController,
-    action: "login"
-  }
+    action: "login",
+  },
 ];
 
 export default Routes;
