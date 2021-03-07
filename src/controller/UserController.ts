@@ -21,7 +21,6 @@ export default class UserController {
     });
     const token = getTokenForUser(user);
 
-    // TODO: Return jwt
     return { token };
   }
 }
