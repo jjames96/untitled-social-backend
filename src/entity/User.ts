@@ -2,8 +2,11 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
 export default class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: number;
+
+  @Column({ unique: true })
+  username: string;
 
   @Column()
   firstName: string;
@@ -11,6 +14,7 @@ export default class User {
   @Column()
   lastName: string;
 
+  // TODO: This will need to be hashed!
   @Column()
-  age: number;
+  password: string;
 }

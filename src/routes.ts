@@ -2,29 +2,17 @@ import UserController from "./controller/UserController";
 
 const Routes = [
   {
-    method: "get",
-    route: "/users",
+    method: "post",
+    route: "/register",
     controller: UserController,
-    action: "all",
-  },
-  {
-    method: "get",
-    route: "/users/:id",
-    controller: UserController,
-    action: "one",
+    action: "register",
   },
   {
     method: "post",
-    route: "/users",
+    route: "/login",
     controller: UserController,
-    action: "save",
-  },
-  {
-    method: "delete",
-    route: "/users/:id",
-    controller: UserController,
-    action: "remove",
-  },
+    action: "login"
+  }
 ];
 
 export default Routes;

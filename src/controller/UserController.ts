@@ -5,20 +5,18 @@ import User from "../entity/User";
 export default class UserController {
   private userRepository = getRepository(User);
 
-  async all() {
-    return this.userRepository.find();
-  }
-
-  async one(request: Request) {
-    return this.userRepository.findOne(request.params.id);
-  }
-
-  async save(request: Request) {
+  async register(request: Request) {
+    // TODO: Hash password!
     return this.userRepository.save(request.body);
   }
 
-  async remove(request: Request) {
-    const userToRemove = await this.userRepository.findOne(request.params.id);
-    await this.userRepository.remove(userToRemove);
+  async login(request: Request) {
+    const user = await this.userRepository.findOneOrFail({
+      username: request.body.username,
+      password: request.body.password,
+    });
+
+    // TODO: Return jwt
+    return { token: user.username };
   }
 }
