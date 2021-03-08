@@ -14,7 +14,6 @@ export default class User {
   @Column()
   lastName: string;
 
-  // TODO: This will need to be hashed!
   @Column()
   password: string;
 }
