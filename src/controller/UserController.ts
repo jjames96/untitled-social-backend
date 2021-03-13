@@ -8,11 +8,31 @@ export default class UserController {
   private userRepository = getRepository(User);
 
   async register(request: Request) {
+    if (
+      !request.body.username ||
+      !request.body.firstName ||
+      !request.body.lastName ||
+      !request.body.password ||
+      !request.body.confirmPassword
+    ) {
+      // TODO: Missing fields, throw error
+      return {};
+    }
+
+    if (
+      request.body.password !== request.body.confirmPassword ||
+      request.body.password.length < 3
+    ) {
+      // TODO: Passwords are invalid, throw error
+      return {};
+    }
+
     const hashedPassword = await hash(request.body.password, {
       type: argon2id,
     });
+    const { username } = request.body;
     const userToSave = {
-      username: request.body.username,
+      username,
       firstName: request.body.firstName,
       lastName: request.body.lastName,
       password: hashedPassword,
@@ -20,7 +40,7 @@ export default class UserController {
     const savedUser = await this.userRepository.save(userToSave);
     const token = getTokenForUser(savedUser);
 
-    return { token };
+    return { username, token };
   }
 
   async login(request: Request) {
@@ -37,8 +57,9 @@ export default class UserController {
       return {};
     }
 
+    const { username } = user;
     const token = getTokenForUser(user);
 
-    return { token };
+    return { username, token };
   }
 }
