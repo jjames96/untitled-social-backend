@@ -2,7 +2,7 @@ import { getRepository } from "typeorm";
 import { Request } from "express";
 import { argon2id, hash, verify } from "argon2";
 import User from "../entity/User";
-import getTokenForUser from "../util/UserTokenHelper";
+import { getTokenForUser } from "../util/UserTokenHelper";
 
 export default class UserController {
   private userRepository = getRepository(User);
